@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 //导入需要使用的功能
 import { FormBuilder, FormGroup, Validators } from '@angular/forms' 
+//导入登录服务
+import { LoginService } from './login.service'
+//导入路由服务
+import { Router } from '@angular/router'
+//导入类型
+import { LoginForm } from './login.type'
 
 @Component({
   selector: 'app-login',
@@ -10,25 +16,44 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {
   }
 
-  validateForm: FormGroup;
+  loginForm: FormGroup
 
   submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      if (this.validateForm.controls.hasOwnProperty(i)){
-        this.validateForm.controls[ i ].markAsDirty();
-        this.validateForm.controls[ i ].updateValueAndValidity();
+    const loginForm = this.loginForm
+    const { controls } = loginForm
+    for (const i in controls) {
+      if (controls.hasOwnProperty(i)){
+        controls[ i ].markAsDirty();
+        controls[ i ].updateValueAndValidity();
       }
     }
+
+    //判断验证是否成功
+    if (!loginForm.valid) {
+      console.log('验证失败')
+      return
+    }
+    // console.log('验证成功', loginForm.value)
+    const { userName, password } = loginForm.value
+    const loginParams = {
+      username: userName,
+      password
+    }
+    this.loginService.login(loginParams).subscribe(res =>{
+      // console.log('登录成功', res)
+      this.router.navigate(['/home'])
+    })
   }
 
+
   ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      userName: [ null, [ Validators.required ] ],
-      password: [ null, [ Validators.required ] ],
-      remember: [ true ]
+    this.loginForm = this.fb.group({
+      userName: [ null, [ Validators.required, Validators.minLength(3), Validators.maxLength(6) ] ],
+      password: [ null, [ Validators.required, Validators.pattern(/^[a-zA-Z0-9]{3,6}$/) ] ],
+      // remember: [ true ]
     });
   }
 

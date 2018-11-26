@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http'
 
 import { LoginForm } from './login.type'
 
+import { URL } from '../config'
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +15,7 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   //登录
-  login(loginForm){
-    return this.http.post(`http://localhost:2080/tokens`,loginForm)
+  login(loginForm: LoginForm){
+    return this.http.post(`${URL}/tokens`,loginForm)
   }
 }

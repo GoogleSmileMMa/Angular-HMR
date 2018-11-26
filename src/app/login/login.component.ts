@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     }
     // console.log('验证成功', loginForm.value)
     const { userName, password } = loginForm.value
-    const loginParams = {
+    const loginParams: LoginForm = {
       username: userName,
       password
     }
@@ -51,8 +51,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      userName: [ null, [ Validators.required, Validators.minLength(3), Validators.maxLength(6) ] ],
-      password: [ null, [ Validators.required, Validators.pattern(/^[a-zA-Z0-9]{3,6}$/) ] ],
+      userName: [ 
+        'zqran',
+        [ Validators.required, Validators.minLength(3), Validators.maxLength(6) ] ],
+      password: [ 
+        '123456', 
+        [ Validators.required, Validators.pattern(/^[a-zA-Z0-9]{3,6}$/) ] ],
       // remember: [ true ]
     });
   }

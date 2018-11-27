@@ -5,10 +5,15 @@ import { CommonModule } from '@angular/common' // *ngfor *ngif 指令
 import { LoginComponent } from './login/login.component'
 import { HomeComponent } from './home/home.component'
 
+//导入守卫服务
+import { AuthGuard } from './auth.guard'
+
 const appRoutes: Routes = [
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    //路由守卫
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',

@@ -9,6 +9,11 @@ import { Router } from '@angular/router'
 //导入类型
 import { LoginForm } from './login.type'
 
+//token接口
+interface Token {
+  token: string
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -42,8 +47,10 @@ export class LoginComponent implements OnInit {
       username: userName,
       password
     }
-    this.loginService.login(loginParams).subscribe(res =>{
-      // console.log('登录成功', res)
+    this.loginService.login(loginParams).subscribe((res: Token) =>{
+      console.log('登录成功', res)
+      //存储token
+      localStorage.setItem('angular-token',res.token)
       this.router.navigate(['/home'])
     })
   }

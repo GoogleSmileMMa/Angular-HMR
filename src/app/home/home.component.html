@@ -6,8 +6,8 @@
         <li nz-submenu>
             <span title><i nz-icon type="user"></i><span class="nav-text">员工管理</span></span>
             <ul>
-              <li nz-menu-item>员工列表</li>
-              <li nz-menu-item>员工添加</li>
+              <li nz-menu-item routerLink="/home/employee">员工列表</li>
+              <li nz-menu-item routerLink="/home/employee/add">员工添加</li>
             </ul>
         </li>
         <li nz-submenu>
@@ -39,7 +39,8 @@
     </nz-header>
     <nz-content style="margin:24px 16px 0;">
       <div style="padding:24px; background: #fff; min-height: 360px;">
-        Content
+        <!--子路由的出口，用来加载员工管理等模块-->
+        <router-outlet></router-outlet>
       </div>
     </nz-content>
     <nz-footer style="text-align: left;">盖娅互娱 ©2018 Implement By Angular</nz-footer>

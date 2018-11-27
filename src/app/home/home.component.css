@@ -2,8 +2,36 @@
     height: 100%;
 }
 
+/* 该组件的宿主元素（也就是父级元素）*/
+/* :host {
+    background-attachment: #f00;
+} */
+
+
 :host ::ng-deep .logo {
     height: 32px;
     background: rgba(255,255,255,.2);
     margin: 16px;
   }
+
+/* :host ::ng-deep .logo img {
+    width: 100%;
+    margin-top: 5px;
+} */
+
+:host ::ng-deep .ant-avatar {
+    margin-top: 16px;
+    margin-right: 16px;
+  }
+
+  .home-wrapper .logout {
+    position: absolute;
+    top: 10px;
+    left: 39px;
+    height: 40px;
+  }
+  
+  .home-wrapper .logout:focus {
+    text-decoration: none;
+  }
+  

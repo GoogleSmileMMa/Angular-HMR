@@ -19,9 +19,9 @@ export class HomeService {
     const token = localStorage.getItem('angular-token')
 
     return this.http.delete(`${URL}/tokens`,{
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+      // headers: {
+      //   Authorization: `Bearer ${token}`
+      // }
     })
   }
 }

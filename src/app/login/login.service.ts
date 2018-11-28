@@ -16,6 +16,10 @@ export class LoginService {
 
   //登录
   login(loginForm: LoginForm){
-    return this.http.post(`${URL}/tokens`,loginForm)
+    return this.http.post(`${URL}/tokens`,loginForm,{
+      headers: {
+        'No-Auth': 'TRUE'
+      }
+    })
   }
 }
